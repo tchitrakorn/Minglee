@@ -1,0 +1,30 @@
+[
+    {
+        "userId": 1,
+        "email": "tc3117@columbia.edu",
+        "password": "abc123",
+        "firstname": "Tattie",
+        "lastname": "Chitrakorn"
+    },
+    {
+        "userId": 2,
+        "email": "jennie@columbia.edu",
+        "password": "abc123",
+        "firstname": "Jenny",
+        "lastname": "Mills"
+    },
+    {
+        "userId": 3,
+        "email": "lily@columbia.edu",
+        "password": "abc123",
+        "firstname": "Lily",
+        "lastname": "Kim"
+    },
+    {
+        "userId": 4,
+        "email": "bobby@columbia.edu",
+        "password": "abc123",
+        "firstname": "Bobby",
+        "lastname": "Ross"
+    }
+]

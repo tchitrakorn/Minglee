@@ -1,0 +1,150 @@
+[
+    {
+        "hostId": 1,
+        "active": true,
+        "full": false,
+        "name": "Holidays Market",
+        "date": "2023-11-25T00:17:00.5640Z",
+        "location": "Columbus Circle",
+        "mode": "in-person",
+        "description": "Holidays shopping! Meet me at 116 Broadway gate. Can also grab dinner after",
+        "maxSize": 5,
+        "participants": [
+            {
+                "userId": 1,
+                "email": "tc3117@columbia.edu",
+                "password": "abc123",
+                "firstname": "Tattie",
+                "lastname": "Chitrakorn"
+            },
+            {
+                "userId": 2,
+                "email": "jennie@columbia.edu",
+                "password": "abc123",
+                "firstname": "Jenny",
+                "lastname": "Mills"
+            },
+            {
+                "userId": 3,
+                "email": "lily@columbia.edu",
+                "password": "abc123",
+                "firstname": "Lily",
+                "lastname": "Kim"
+            }
+        ]
+    },
+    {
+        "hostId": 2,
+        "active": true,
+        "full": false,
+        "name": "Karaoke",
+        "date": "2023-11-30T00:17:00.5640Z",
+        "location": "Max Karaoke",
+        "mode": "in-person",
+        "description": "We're doing karaoke marathon in k-town this week. Join us at Max Karaoke! There's a discount for a group of 4 or less",
+        "maxSize": 4,
+        "participants": [
+            {
+                "userId": 1,
+                "email": "tc3117@columbia.edu",
+                "password": "abc123",
+                "firstname": "Tattie",
+                "lastname": "Chitrakorn"
+            },
+            {
+                "userId": 2,
+                "email": "jennie@columbia.edu",
+                "password": "abc123",
+                "firstname": "Jenny",
+                "lastname": "Mills"
+            }
+        ]
+    },
+    {
+        "hostId": 3,
+        "active": true,
+        "full": false,
+        "name": "Little Shop of Horror",
+        "date": "2023-11-30T00:17:00.5640Z",
+        "location": "Broadway",
+        "mode": "in-person",
+        "description": "Got a few discounted tickets for this week! First come first serve. Please make sure you can arrive at least 30 min before the show. You're more than happy to join me for dinner beofre the show!",
+        "maxSize": 4,
+        "participants": [
+            {
+                "userId": 3,
+                "email": "lily@columbia.edu",
+                "password": "abc123",
+                "firstname": "Lily",
+                "lastname": "Kim"
+            }
+        ]
+    },
+    {
+        "hostId": 1,
+        "active": true,
+        "full": false,
+        "name": "Paintball",
+        "date": "2023-11-30T00:17:00.5640Z",
+        "location": "Soha Studio",
+        "mode": "in-person",
+        "description": "Looking for two teams of five for an epic paintball battle!",
+        "maxSize": 10,
+        "participants": [
+            {
+                "userId": 1,
+                "email": "tc3117@columbia.edu",
+                "password": "abc123",
+                "firstname": "Tattie",
+                "lastname": "Chitrakorn"
+            }
+        ]
+    },
+    {
+        "hostId": 3,
+        "active": true,
+        "full": false,
+        "name": "Online Movie",
+        "date": "2023-11-30T00:17:00.5640Z",
+        "location": "Disney+",
+        "mode": "virtual",
+        "description": "Looking for a movie party! It's flu season right now so virtual option only but I will have my video on. Join me and my friends!",
+        "maxSize": 10,
+        "participants": [
+            {
+                "userId": 3,
+                "email": "lily@columbia.edu",
+                "password": "abc123",
+                "firstname": "Lily",
+                "lastname": "Kim"
+            }
+        ]
+    },
+    {
+        "hostId": 4,
+        "active": true,
+        "full": false,
+        "name": "Among Us!!!",
+        "date": "2023-11-30T00:17:00.5640Z",
+        "location": "Discord",
+        "mode": "virtual",
+        "description": "We will be doing multiple sessions for a few hours!! Feel free to come and go. The more the merrier so please tell your friends!",
+        "maxSize": 15,
+        "participants": [
+            {
+                "userId": 4,
+                "email": "bobby@columbia.edu",
+                "password": "abc123",
+                "firstname": "Bobby",
+                "lastname": "Ross"
+            },
+            {
+                "userId": 3,
+                "email": "lily@columbia.edu",
+                "password": "abc123",
+                "firstname": "Lily",
+                "lastname": "Kim"
+            }
+        ]
+    }
+]
