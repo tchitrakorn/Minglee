@@ -6,7 +6,8 @@ import HomeFeed from "../HomeFeed/HomeFeed.jsx";
 
 function Login(props) {
     const [mode, setMode] = useState(props.mode);
-    const [name, setName] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     // const [userId, setUserId] = useState('');
@@ -41,14 +42,14 @@ function Login(props) {
     const handleSubmitSignup = (e) => {
         e.preventDefault();
         let data = {
-            name: name,
+            firstname: firstname,
+            lastname: lastname,
             email: email,
             password: password,
         };
         axios
-            .post("/signup", data)
+            .post("http://localhost:8080/signup", data)
             .then((response) => {
-                console.log(response);
                 setMode("login");
             })
             .catch((error) => {
@@ -100,10 +101,17 @@ function Login(props) {
             <form class="login-wrapper" onSubmit={handleSubmitSignup}>
                 <div class="host-title">Sign up to start mingling!</div>
                 <div>
-                    Name:
+                    First name:
                     <input
                         type="text"
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setFirstname(e.target.value)}
+                    ></input>
+                </div>
+                <div>
+                    Last name:
+                    <input
+                        type="text"
+                        onChange={(e) => setLastname(e.target.value)}
                     ></input>
                 </div>
                 <div>
