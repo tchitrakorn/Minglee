@@ -3,10 +3,15 @@ const app = express();
 const port = 8080;
 const mongodb = require('../database/index.js')
 const connectDB = require('../database/connect.js')
+const cors = require('cors');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+app.use(cors({
+  origin: "*",
+  methods: ['GET', 'POST', 'DELETE', 'PATCH']
+}))
 
 // Establish database connection
 connectDB()
@@ -68,7 +73,8 @@ app.patch('/event', (req, res) => {
 })
 
 // Verify user's credentials (log-in)
-app.post('/login2', (req, res) => {
+app.post('/login', (req, res) => {
+  console.log('logging in...')
   let email = req.body.email;
   let password = req.body.password;
   mongodb.getLoggedInUser(email, password)
