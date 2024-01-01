@@ -19,19 +19,38 @@ function EventCard(props) {
         joinText = 'Joined. Cancel?'
     }
 
+    /*axios.get('http://localhost:8080/events', { params })
+            .then((response) => {
+                let events = response.data;
+                let filteredEvents = helpers.filterEvents(events, inperson, virtual, groupSize, keyword);
+                setEvents(filteredEvents);
+            })
+            .catch((error) => {
+                console.log(error);
+            }); */
+
     const handleJoin = (e) => {
         let data = {
             userId: props.userId,
-            eventId: props.event.id
+            eventId: props.event._id
         }
-        axios.post('/joinEvent', data)
-            .then((response) => {
-                console.log(response);
-                setJoinable(!joinable);
-            })
-            .catch((error) => {
-                console.log('error');
-            });
+        if (joinable) {
+            axios.post('http://localhost:8080/join', data)
+                .then((response) => {
+                    setJoinable(!joinable);
+                })
+                .catch((error) => {
+                    console.log('join error: ', error);
+                });
+        } else {
+            axios.post('http://localhost:8080/unjoin', data)
+                .then((response) => {
+                    setJoinable(!joinable);
+                })
+                .catch((error) => {
+                    console.log('unjoin error: ', error);
+                });
+        }
     }
 
     return (
@@ -53,7 +72,6 @@ function EventCard(props) {
                 {/* <button>Join</button> */}
                 <button
                     type="button"
-                    disabled={!joinable}
                     onClick={handleJoin}>
                     {joinText}
                 </button>
