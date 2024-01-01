@@ -18,7 +18,6 @@ connectDB()
 
 // Retrieve all events
 app.get('/events', (req, res) => {
-  console.log('getting all events...')
   mongodb.getAllEvents()
     .then(results => res.status(200).send(results))
     .catch(error => res.status(500).send(error))
@@ -34,6 +33,8 @@ app.get('/myevents/:id', (req, res) => {
 
 // Add a new event
 app.post('/event', (req, res) => {
+  console.log('creating an event...')
+  console.log(req.body);
   mongodb.addEvent(req.body)
     .then(results => res.status(200).send(results))
     .catch(error => res.status(500).send(error));

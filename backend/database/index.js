@@ -103,7 +103,7 @@ const addEvent = async (event) => {
         location: event.location,
         mode: event.mode,
         description: event.description,
-        maxSize: event.size,
+        maxSize: event.maxSize,
         participants: [host]
     });
     try {

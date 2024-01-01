@@ -13,20 +13,17 @@ function Host(props) {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         let data = {
-            host: props.userId,
-            title: title,
+            hostId: props.userId,
+            name: title,
             description: description,
             location: location,
-            date: date,
-            time: time,
-            groupSize: groupSize,
+            date: new Date(date),
+            maxSize: groupSize,
             mode: mode,
         };
         axios
-            .post("/formsubmit", data)
+            .post("http://localhost:8080/event", data)
             .then((response) => {
-                console.log(response);
-                alert("Form successfully submitted!");
                 setTitle("");
                 setDescription("");
                 setLocation("");
@@ -36,7 +33,7 @@ function Host(props) {
                 setMode("");
             })
             .catch((error) => {
-                console.log("error");
+                console.log("create event error: ", error);
             });
     };
 

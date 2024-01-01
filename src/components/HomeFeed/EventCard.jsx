@@ -19,16 +19,6 @@ function EventCard(props) {
         joinText = 'Cancel'
     }
 
-    /*axios.get('http://localhost:8080/events', { params })
-            .then((response) => {
-                let events = response.data;
-                let filteredEvents = helpers.filterEvents(events, inperson, virtual, groupSize, keyword);
-                setEvents(filteredEvents);
-            })
-            .catch((error) => {
-                console.log(error);
-            }); */
-
     const handleJoin = (e) => {
         let data = {
             userId: props.userId,
@@ -53,6 +43,14 @@ function EventCard(props) {
         }
     }
 
+    const handleDelete = (e) => {
+        axios.delete(`http://localhost:8080/event/${props.event._id}`)
+            .then((response) => { })
+            .catch((error) => {
+                console.log('unjoin error: ', error);
+            });
+    }
+
     return (
         <div className="event-card">
             <div class="card-title">{props.event.name}</div>
@@ -69,12 +67,18 @@ function EventCard(props) {
             </div>
             <div>{props.event.description}</div>
             <div class="card-corner">
-                {/* <button>Join</button> */}
-                <button
-                    type="button"
-                    onClick={handleJoin}>
-                    {joinText}
-                </button>
+                {props.event.hostId == props.userId &&
+                    <button
+                        type="button"
+                        onClick={handleDelete}>
+                        Delete
+                    </button>}
+                {props.event.hostId != props.userId &&
+                    <button
+                        type="button"
+                        onClick={handleJoin}>
+                        {joinText}
+                    </button>}
                 {props.event.participants.length}/{props.event.maxSize}
             </div>
         </div>
