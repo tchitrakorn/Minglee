@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Navigate } from 'react-router-dom';
 
 function Host(props) {
     const [title, setTitle] = useState("");
@@ -18,6 +19,7 @@ function Host(props) {
     const [timeWarning, setTimeWarning] = useState("")
     const [dateWarning, setDateWarning] = useState("")
     const [groupSizeWarning, setGroupSizeWarning] = useState("")
+    const [redirect, setRedirect] = useState(false)
 
 
     useEffect(() => {
@@ -57,11 +59,16 @@ function Host(props) {
                 setTime("");
                 setGroupSize("");
                 setMode("");
+                setRedirect(true);
             })
             .catch((error) => {
                 console.log("create event error: ", error);
             });
     };
+
+    if (redirect) {
+        return <Navigate to='/myevent' />
+    }
 
     return (
         <div>
