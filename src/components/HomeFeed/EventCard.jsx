@@ -16,7 +16,7 @@ function EventCard(props) {
 
     let joinText = 'Join';
     if (joinable === false) {
-        joinText = 'Cancel'
+        joinText = 'Unjoin'
     }
 
     const handleJoin = (e) => {
@@ -71,7 +71,7 @@ function EventCard(props) {
                     <button
                         type="button"
                         onClick={handleDelete}>
-                        Delete
+                        Cancel
                     </button>}
                 {props.event.hostId != props.userId &&
                     <button

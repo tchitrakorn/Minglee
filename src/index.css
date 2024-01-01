@@ -373,3 +373,7 @@ u:hover {
   width: 100vw;
   /* bottom: 0; */
 }
+
+.warning-text {
+  color: red;
+}
