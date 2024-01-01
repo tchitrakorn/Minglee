@@ -16,7 +16,7 @@ function EventCard(props) {
 
     let joinText = 'Join';
     if (joinable === false) {
-        joinText = 'Joined. Cancel?'
+        joinText = 'Cancel'
     }
 
     /*axios.get('http://localhost:8080/events', { params })

@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MyEventCard from "./MyEventCard.jsx";
+import EventCard from "../HomeFeed/EventCard.jsx"
 
 function MyEvent(props) {
     const [attendingEvents, setAttendingEvents] = useState([]);
     const [hostingEvents, setHostingEvents] = useState([]);
 
     useEffect(() => {
-        console.log("userId: ", props.userId);
         let params = {
             userId: props.userId,
         };
 
         axios
-            .get("/usersEvents", { params })
+            .get(`http://localhost:8080/myevents/${props.userId}`)
             .then((response) => {
-                setAttendingEvents(response.data);
+                setAttendingEvents(response.data.attendingEvents);
+                setHostingEvents(response.data.hostingEvents);
             })
             .catch((error) => {
-                console.log("error");
-            });
-
-        axios
-            .get("/hostingEvents", { params })
-            .then((response) => {
-                console.log(response);
-                setHostingEvents(response.data);
-            })
-            .catch((error) => {
-                console.log("error");
+                console.log("myevents error: ", error);
             });
     });
 
@@ -48,13 +39,19 @@ function MyEvent(props) {
                 <div>
                     <p class="myevents-title">Hosting</p>
                     {hostingEvents.map((event) => (
-                        <MyEventCard event={event} />
+                        <EventCard
+                            userId={props.userId}
+                            event={event}
+                        />
                     ))}
                 </div>
                 <div>
                     <p class="myevents-title">Attending</p>
                     {attendingEvents.map((event) => (
-                        <MyEventCard event={event} />
+                        <EventCard
+                            userId={props.userId}
+                            event={event}
+                        />
                     ))}
                 </div>
             </div>
