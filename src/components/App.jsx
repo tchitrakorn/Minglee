@@ -37,7 +37,7 @@ const App = () => {
                     setUserId={setUserId}
                     setUserName={setUserName}
                 />
-                <div class="bottom-bar">- Made by Foz and Tattie 2021 -</div>
+                <div class="bottom-bar">- Made by Tattie -</div>
             </div>
         );
     }

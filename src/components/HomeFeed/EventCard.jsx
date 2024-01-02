@@ -66,19 +66,33 @@ function EventCard(props) {
 
     return (
         <div className="event-card">
-            <div class="card-title">{props.event.name}</div>
-            <div>
-                <p class="event-card-title">Host: </p>
-                {getHost(props.event.hostId, props.event.participants)}
+            <div className="event-card-details">
+                <span className="card-title">{props.event.name}</span>
+                {props.event.hostId == props.userId &&
+                    <span class="material-icons clickable edit-icon" onClick={handleEdit}>mode</span>}
             </div>
             <div>
-                <span class="material-icons">schedule</span>
-                {moment(props.event.date).format('MMMM Do YYYY, h:mm:ss a')} {" "}
-                <span class="material-icons">place</span>
-                {props.event.location}{" "}
-                <span class="virtual-tab">{props.event.mode}</span>
+                <div className="event-card-details">
+                    <span class="material-icons">person</span>
+                    {getHost(props.event.hostId, props.event.participants)}
+                </div>
+                <div className="event-card-details">
+                    <span class="material-icons">schedule</span>
+                    {moment(props.event.date).format('MMMM Do YYYY, h:mm a')} {" "}
+                </div>
+                <div className="event-card-details">
+                    <span class="material-icons">place</span> {" "}
+                    {props.event.location}{" "}
+                </div>
+                <div className="event-card-details">
+                    <span class="material-icons">computer</span> {" "}
+                    <span class="virtual-tab">{props.event.mode}</span>
+                </div>
+                <div className="event-card-details">
+                    <span class="material-icons">notes</span> {" "}
+                    "{props.event.description}"
+                </div>
             </div>
-            <div>Host's note: {props.event.description}</div>
             <div class="card-corner">
                 <div>
                     {props.event.hostId == props.userId &&
@@ -86,12 +100,6 @@ function EventCard(props) {
                             type="button"
                             onClick={handleDelete}>
                             Cancel
-                        </button>}
-                    {props.event.hostId == props.userId &&
-                        <button
-                            type="button"
-                            onClick={handleEdit}>
-                            Edit
                         </button>}
                 </div>
                 {props.event.hostId != props.userId &&

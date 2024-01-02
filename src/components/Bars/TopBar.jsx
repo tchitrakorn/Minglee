@@ -12,7 +12,7 @@ function TopBar(props) {
                         <span class="material-icons site-logo">
                             emoji_people
                         </span>{" "}
-                        <span class="site-name">minglee</span>
+                        <span class="site-name">Minglee</span>
                     </div>
                     <div class="menu-right">
                         <div>
