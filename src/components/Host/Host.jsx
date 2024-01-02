@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
+import moment from 'moment';
 
 function Host(props) {
+    // Handle data from edit
+    const { state } = useLocation();
+
+    // Set default values
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState("");
@@ -12,7 +17,7 @@ function Host(props) {
     const [mode, setMode] = useState("in-person");
     const [invalidForm, setInvalidForm] = useState(true)
 
-    // warning variables
+    // Warning variables
     const [titleWarning, setTitleWarning] = useState("")
     const [locationWarning, setLocationWarning] = useState("")
     const [descriptionWarning, setDescriptionWarning] = useState("")
@@ -21,8 +26,19 @@ function Host(props) {
     const [groupSizeWarning, setGroupSizeWarning] = useState("")
     const [redirect, setRedirect] = useState(false)
 
+    useEffect(() => {
+        if (state) {
+            updateStateFromEdit()
+        }
+    }, [])
 
     useEffect(() => {
+        validateForm();
+    })
+
+    const submitFormText = state === null ? "Create Event" : "Update Event";
+
+    const validateForm = () => {
         let valid = true
         if (description == "" || title == "" || location == "" || date == "" || time == "" || groupSize == "" || mode == "") {
             valid = false
@@ -36,34 +52,71 @@ function Host(props) {
         if (valid) {
             setInvalidForm(false)
         }
-    })
+    }
+
+    const updateStateFromEdit = () => {
+        setTitle(state.name);
+        setDescription(state.description);
+        setLocation(state.location);
+        setDate(moment(state.date).format('YYYY-MM-DD'));
+        setTime(moment(state.date).format('HH:mm:ss'));
+        setGroupSize(state.maxSize);
+        setMode(state.mode);
+    }
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        let data = {
-            hostId: props.userId,
-            name: title,
-            description: description,
-            location: location,
-            date: new Date(date + ' ' + time),
-            maxSize: groupSize,
-            mode: mode,
-        };
-        axios
-            .post("http://localhost:8080/event", data)
-            .then((response) => {
-                setTitle("");
-                setDescription("");
-                setLocation("");
-                setDate("");
-                setTime("");
-                setGroupSize("");
-                setMode("");
-                setRedirect(true);
-            })
-            .catch((error) => {
-                console.log("create event error: ", error);
-            });
+        if (state) { // update an event
+            let data = {
+                eventId: state._id,
+                name: title,
+                description: description,
+                location: location,
+                date: new Date(date + ' ' + time),
+                maxSize: groupSize,
+                mode: mode,
+            };
+            axios
+                .patch("http://localhost:8080/event", data)
+                .then((response) => {
+                    setTitle("");
+                    setDescription("");
+                    setLocation("");
+                    setDate("");
+                    setTime("");
+                    setGroupSize("");
+                    setMode("");
+                    setRedirect(true);
+                })
+                .catch((error) => {
+                    console.log("update event error: ", error);
+                });
+        } else { // create an event
+            let data = {
+                hostId: props.userId,
+                name: title,
+                description: description,
+                location: location,
+                date: new Date(date + ' ' + time),
+                maxSize: groupSize,
+                mode: mode,
+            };
+            axios
+                .post("http://localhost:8080/event", data)
+                .then((response) => {
+                    setTitle("");
+                    setDescription("");
+                    setLocation("");
+                    setDate("");
+                    setTime("");
+                    setGroupSize("");
+                    setMode("");
+                    setRedirect(true);
+                })
+                .catch((error) => {
+                    console.log("create event error: ", error);
+                });
+        }
     };
 
     if (redirect) {
@@ -88,6 +141,7 @@ function Host(props) {
                                 id="title"
                                 name="title"
                                 placeholder="Example: Movie Night"
+                                value={title}
                                 onChange={(e) => {
                                     setTitle(e.target.value)
                                     if (e.target.value == "") {
@@ -108,6 +162,7 @@ function Host(props) {
                                 id="description"
                                 name="description"
                                 placeholder="Example: Let's go watch Soul!"
+                                value={description}
                                 onChange={(e) => {
                                     setDescription(e.target.value)
                                     if (e.target.value == "") {
@@ -127,6 +182,7 @@ function Host(props) {
                                 id="location"
                                 name="location"
                                 placeholder="Example: Local AMC"
+                                value={location}
                                 onChange={(e) => {
                                     setLocation(e.target.value)
                                     if (e.target.value == "") {
@@ -146,6 +202,7 @@ function Host(props) {
                                     type="date"
                                     id="date"
                                     name="date"
+                                    value={date}
                                     onChange={(e) => {
                                         setDate(e.target.value)
                                         if (e.target.value == "") {
@@ -166,6 +223,7 @@ function Host(props) {
                                     type="time"
                                     id="time"
                                     name="time"
+                                    value={time}
                                     onChange={(e) => {
                                         setTime(e.target.value)
                                         if (e.target.value == "") {
@@ -185,6 +243,7 @@ function Host(props) {
                                 type="text"
                                 id="groupSize"
                                 name="groupSize"
+                                value={groupSize}
                                 onChange={(e) => {
                                     setGroupSize(e.target.value)
                                     if (e.target.value == "") {
@@ -204,6 +263,7 @@ function Host(props) {
                             <select
                                 id="mode"
                                 name="mode"
+                                value={mode}
                                 onChange={(e) => setMode(e.target.value)}
                             >
                                 <option value="in-person">In-person</option>
@@ -216,7 +276,7 @@ function Host(props) {
                         className="form-submit"
                         disabled={invalidForm}
                         type="submit"
-                        value="Submit Form"
+                        value={submitFormText}
                     ></input>
                 </form>
             </div>

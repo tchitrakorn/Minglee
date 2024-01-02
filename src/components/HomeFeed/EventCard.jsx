@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from 'moment';
+import { Navigate, useNavigate } from 'react-router-dom';
+import Host from '../Host/Host.jsx';
 
 const getHost = (hostId, participants) => {
     const result = participants.filter(participant => {
@@ -13,6 +15,9 @@ const getHost = (hostId, participants) => {
 
 function EventCard(props) {
     const [joinable, setJoinable] = useState(!props.event.participants.some(participant => participant.userId == props.userId));
+    const [redirect, setRedirect] = useState(false)
+
+    const navigate = useNavigate();
 
     let joinText = 'Join';
     if (joinable === false) {
@@ -51,6 +56,14 @@ function EventCard(props) {
             });
     }
 
+    const handleEdit = (e) => {
+        navigate('/host', { state: props.event });
+    }
+
+    if (redirect) {
+        return <Navigate to='/host' />
+    }
+
     return (
         <div className="event-card">
             <div class="card-title">{props.event.name}</div>
@@ -65,14 +78,22 @@ function EventCard(props) {
                 {props.event.location}{" "}
                 <span class="virtual-tab">{props.event.mode}</span>
             </div>
-            <div>{props.event.description}</div>
+            <div>Host's note: {props.event.description}</div>
             <div class="card-corner">
-                {props.event.hostId == props.userId &&
-                    <button
-                        type="button"
-                        onClick={handleDelete}>
-                        Cancel
-                    </button>}
+                <div>
+                    {props.event.hostId == props.userId &&
+                        <button
+                            type="button"
+                            onClick={handleDelete}>
+                            Cancel
+                        </button>}
+                    {props.event.hostId == props.userId &&
+                        <button
+                            type="button"
+                            onClick={handleEdit}>
+                            Edit
+                        </button>}
+                </div>
                 {props.event.hostId != props.userId &&
                     <button
                         type="button"
