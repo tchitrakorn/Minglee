@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MyEventCard from "./MyEventCard.jsx";
 import EventCard from "../HomeFeed/EventCard.jsx"
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 function MyEvent(props) {
     const [attendingEvents, setAttendingEvents] = useState([]);
     const [hostingEvents, setHostingEvents] = useState([]);
+    const [userDetails, setUserDetails] = useState({})
 
     useEffect(() => {
         let params = {
@@ -21,11 +24,22 @@ function MyEvent(props) {
             .catch((error) => {
                 console.log("myevents error: ", error);
             });
+
+        axios
+            .get(`http://localhost:8080/user/${props.userId}`)
+            .then((response) => {
+                console.log('user details: ', response.data)
+                setUserDetails(response.data)
+            })
+            .catch((error) => {
+                console.log("get user error: ", error);
+            });
+
     });
 
     return (
-        <div class="myevent-wrapper auto-margin">
-            <div class="profile-wrapper">
+        <div className="myevent-wrapper auto-margin">
+            <div className="profile-wrapper">
                 <div>
                     <img
                         class="profile-icon"
@@ -33,7 +47,32 @@ function MyEvent(props) {
                         alt="An adorable bear icon"
                     />
                 </div>
-                <div class="profile-name">{props.userName}</div>
+                <div className="profile-name">{props.userName}</div>
+                <div className="profile-user-details">
+                    <Popup trigger=
+                        {<span class="material-icons clickable edit-icon">more</span>}
+                        position="right center">
+                        <div className="user-detail">
+                            <div className="event-card-details">Personal Info:</div>
+                            <div className="event-card-details">
+                                <span class="material-icons">person</span>
+                                {userDetails.firstname} {" "} {userDetails.lastname}
+                            </div>
+                            <div className="event-card-details">
+                                <span class="material-icons">email</span>
+                                {userDetails.email}
+                            </div>
+                            <div className="event-card-details">
+                                <span class="material-icons">phone</span>
+                                {userDetails.phone}
+                            </div>
+                            <div className="event-card-details">
+                                <span class="material-icons">discord</span>
+                                {userDetails.discord}
+                            </div>
+                        </div>
+                    </Popup>
+                </div>
             </div>
             <div class="split">
                 <div>

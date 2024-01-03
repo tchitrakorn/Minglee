@@ -213,6 +213,21 @@ const addUser = async (user) => {
     }
 }
 
+const getUser = async (userId) => {
+    try {
+        const result = await User.find({
+            userId: userId.toString()
+        }, { __v: 0 }
+        ).select('-password')
+        if (result.length == 0) {
+            throw new Error(error)
+        }
+        return result[0]
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
 
 module.exports.initializeUserIdCounter = initializeUserIdCounter;
 module.exports.getAllEvents = getAllEvents;
@@ -224,3 +239,4 @@ module.exports.unjoinEvent = unjoinEvent;
 module.exports.updateEvent = updateEvent;
 module.exports.getLoggedInUser = getLoggedInUser;
 module.exports.addUser = addUser;
+module.exports.getUser = getUser;

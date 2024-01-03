@@ -93,6 +93,14 @@ app.post('/signup', (req, res) => {
     .catch(error => res.status(500).send(error))
 });
 
+// Retrieve a user
+app.get('/user/:id', (req, res) => {
+  let userId = req.params.id;
+  mongodb.getUser(userId)
+    .then(results => res.status(200).send(results))
+    .catch(error => res.status(500).send(error))
+});
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
