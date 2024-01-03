@@ -62,7 +62,10 @@ app.post('/unjoin', (req, res) => {
   let eventId = req.body.eventId;
   let userId = req.body.userId;
   mongodb.unjoinEvent(eventId, userId)
-    .then(results => res.status(200).send(results))
+    .then(results => {
+      console.log('results: ', results)
+      res.status(200).send({ results })
+    })
     .catch(error => res.status(500).send(error));
 })
 

@@ -9,6 +9,8 @@ function Login(props) {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [discord, setDiscord] = useState("");
     const [password, setPassword] = useState("");
     // const [userId, setUserId] = useState('');
 
@@ -45,6 +47,8 @@ function Login(props) {
             firstname: firstname,
             lastname: lastname,
             email: email,
+            phone: phone,
+            discord: phone,
             password: password,
         };
         axios
@@ -98,12 +102,13 @@ function Login(props) {
     }
     return (
         <div className="form-wrapper">
-            <form class="login-wrapper" onSubmit={handleSubmitSignup}>
+            <form class="signup-wrapper" onSubmit={handleSubmitSignup}>
                 <div class="host-title">Sign up to start mingling!</div>
                 <div>
                     First name:
                     <input
                         type="text"
+                        placeholder="Jane"
                         onChange={(e) => setFirstname(e.target.value)}
                     ></input>
                 </div>
@@ -111,6 +116,7 @@ function Login(props) {
                     Last name:
                     <input
                         type="text"
+                        placeholder="Doe"
                         onChange={(e) => setLastname(e.target.value)}
                     ></input>
                 </div>
@@ -118,7 +124,24 @@ function Login(props) {
                     Email:
                     <input
                         type="email"
+                        placeholder="janedoe@gmail.com"
                         onChange={(e) => setEmail(e.target.value)}
+                    ></input>
+                </div>
+                <div>
+                    Phone (OPTIONAL):
+                    <input
+                        type="text"
+                        placeholder="(xxx)xxx-xxxx"
+                        onChange={(e) => setPhone(e.target.value)}
+                    ></input>
+                </div>
+                <div>
+                    Discord (OPTIONAL):
+                    <input
+                        type="text"
+                        placeholder="janedoe"
+                        onChange={(e) => setDiscord(e.target.value)}
                     ></input>
                 </div>
                 <div>

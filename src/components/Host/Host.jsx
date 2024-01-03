@@ -15,6 +15,7 @@ function Host(props) {
     const [time, setTime] = useState("");
     const [groupSize, setGroupSize] = useState("");
     const [mode, setMode] = useState("in-person");
+    const [url, setUrl] = useState("");
     const [invalidForm, setInvalidForm] = useState(true)
 
     // Warning variables
@@ -61,6 +62,7 @@ function Host(props) {
         setDate(moment(state.date).format('YYYY-MM-DD'));
         setTime(moment(state.date).format('HH:mm:ss'));
         setGroupSize(state.maxSize);
+        setUrl(state.url)
         setMode(state.mode);
     }
 
@@ -74,6 +76,7 @@ function Host(props) {
                 location: location,
                 date: new Date(date + ' ' + time),
                 maxSize: groupSize,
+                url: url,
                 mode: mode,
             };
             axios
@@ -86,6 +89,7 @@ function Host(props) {
                     setTime("");
                     setGroupSize("");
                     setMode("");
+                    setUrl("");
                     setRedirect(true);
                 })
                 .catch((error) => {
@@ -99,6 +103,7 @@ function Host(props) {
                 location: location,
                 date: new Date(date + ' ' + time),
                 maxSize: groupSize,
+                url: url,
                 mode: mode,
             };
             axios
@@ -111,6 +116,7 @@ function Host(props) {
                     setTime("");
                     setGroupSize("");
                     setMode("");
+                    setUrl("");
                     setRedirect(true);
                 })
                 .catch((error) => {
@@ -157,7 +163,7 @@ function Host(props) {
                         <label>
                             Description: <span className="warning-text">{descriptionWarning}</span>
                             <textarea
-                                rows="4"
+                                rows="2"
                                 cols="50"
                                 id="description"
                                 name="description"
@@ -208,7 +214,7 @@ function Host(props) {
                                         if (e.target.value == "") {
                                             setDateWarning("*cannot be empty")
                                         } else if (new Date(e.target.value) <= new Date()) {
-                                            setDateWarning("*cannot be in the past")
+                                            setDateWarning("*cannot time travel!")
                                         } else {
                                             setDateWarning("")
                                         }
@@ -244,6 +250,7 @@ function Host(props) {
                                 id="groupSize"
                                 name="groupSize"
                                 value={groupSize}
+                                placeholder="Example: 5"
                                 onChange={(e) => {
                                     setGroupSize(e.target.value)
                                     if (e.target.value == "") {
@@ -253,6 +260,21 @@ function Host(props) {
                                     } else {
                                         setGroupSizeWarning("")
                                     }
+                                }}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            URL:
+                            <input
+                                type="text"
+                                id="url"
+                                name="url"
+                                placeholder="Optional"
+                                value={url}
+                                onChange={(e) => {
+                                    setUrl(e.target.value)
                                 }}
                             />
                         </label>

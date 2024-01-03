@@ -27,7 +27,7 @@ const App = () => {
                                 <span class="material-icons site-logo">
                                     emoji_people
                                 </span>{" "}
-                                <span class="site-name">mingly</span>
+                                <span class="site-name">Minglee</span>
                             </div>
                         </div>
                     </div>

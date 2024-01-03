@@ -358,6 +358,10 @@ form.login-wrapper>*+* {
   margin: 3em;
 }
 
+form.signup-wrapper>*+* {
+  margin: 0.75em;
+}
+
 u:hover {
   cursor: pointer;
 }
@@ -404,4 +408,46 @@ u:hover {
 .warning-text {
   color: red;
   font-size: 13px;
+}
+
+
+.host-name:hover,
+.host-name:focus {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.host-name {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+  color: var(--clr-neutral-900);
+}
+
+.host-name:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 51%;
+  right: 51%;
+  bottom: 0;
+  background: var(--clr-primary-300);
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.host-name:hover:before,
+.host-name:focus:before,
+.host-name:active:before {
+  left: 0;
+  right: 0;
 }

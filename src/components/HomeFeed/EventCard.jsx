@@ -3,6 +3,8 @@ import axios from "axios";
 import moment from 'moment';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Host from '../Host/Host.jsx';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const getHost = (hostId, participants) => {
     const result = participants.filter(participant => {
@@ -10,7 +12,11 @@ const getHost = (hostId, participants) => {
             return participant
         }
     })
-    return result[0].firstname + " " + result[0].lastname
+    return result[0]
+}
+
+const getFullname = (user) => {
+    return user.firstname + ' ' + user.lastname;
 }
 
 function EventCard(props) {
@@ -30,6 +36,7 @@ function EventCard(props) {
             eventId: props.event._id
         }
         if (joinable) {
+            console.log('joinging...')
             axios.post('http://localhost:8080/join', data)
                 .then((response) => {
                     setJoinable(!joinable);
@@ -38,6 +45,7 @@ function EventCard(props) {
                     console.log('join error: ', error);
                 });
         } else {
+            console.log('unjoinging...')
             axios.post('http://localhost:8080/unjoin', data)
                 .then((response) => {
                     setJoinable(!joinable);
@@ -74,7 +82,25 @@ function EventCard(props) {
             <div>
                 <div className="event-card-details">
                     <span class="material-icons">person</span>
-                    {getHost(props.event.hostId, props.event.participants)}
+                    <Popup trigger=
+                        {<span className="host-name">{getFullname(getHost(props.event.hostId, props.event.participants))}</span>}
+                        position="right center">
+                        <div className="user-detail">
+                            <div className="event-card-details">Contact Info:</div>
+                            <div className="event-card-details">
+                                <span class="material-icons">email</span>
+                                {getHost(props.event.hostId, props.event.participants).email}
+                            </div>
+                            <div className="event-card-details">
+                                <span class="material-icons">phone</span>
+                                {getHost(props.event.hostId, props.event.participants).phone}
+                            </div>
+                            <div className="event-card-details">
+                                <span class="material-icons">discord</span>
+                                {getHost(props.event.hostId, props.event.participants).discord}
+                            </div>
+                        </div>
+                    </Popup>
                 </div>
                 <div className="event-card-details">
                     <span class="material-icons">schedule</span>
@@ -82,7 +108,7 @@ function EventCard(props) {
                 </div>
                 <div className="event-card-details">
                     <span class="material-icons">place</span> {" "}
-                    {props.event.location}{" "}
+                    <a href={props.event.url} target="_blank">{props.event.location}</a>{" "}
                 </div>
                 <div className="event-card-details">
                     <span class="material-icons">computer</span> {" "}

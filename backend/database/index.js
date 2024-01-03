@@ -39,7 +39,9 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     firstname: String,
-    lastname: String
+    lastname: String,
+    phone: String,
+    discord: String
 })
 
 const User = mongoose.model('User', userSchema);
@@ -54,6 +56,7 @@ const eventSchema = new mongoose.Schema({
     mode: String,
     description: String,
     maxSize: Number,
+    url: String,
     participants: [userSchema]
 })
 
@@ -104,6 +107,7 @@ const addEvent = async (event) => {
         mode: event.mode,
         description: event.description,
         maxSize: event.maxSize,
+        url: event.url,
         participants: [host]
     });
     try {
@@ -146,6 +150,7 @@ const unjoinEvent = async (eventId, userId) => {
     try {
         const filter = { _id: new ObjectId(eventId) }
         const unjoinedParticipant = await User.find({ userId: userId.toString() }, { __v: 0 })
+        console.log('unjoined: ', unjoinedParticipant)
         const update = {
             $pullAll: {
                 participants: unjoinedParticipant
@@ -196,6 +201,8 @@ const addUser = async (user) => {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
+        phone: user.phone,
+        discord: user.discord,
         password: user.password
     });
     try {
