@@ -1,0 +1,38 @@
+[
+    {
+        "userId": 1,
+        "email": "tc3117@columbia.edu",
+        "password": "abc123",
+        "firstname": "Tattie",
+        "lastname": "Chitrakorn",
+        "phone": "(123)456-7890",
+        "discord": "hamlyfe"
+    },
+    {
+        "userId": 2,
+        "email": "jennie@columbia.edu",
+        "password": "abc123",
+        "firstname": "Jenny",
+        "lastname": "Mills",
+        "phone": "(143)056-9860",
+        "discord": "sunshinez"
+    },
+    {
+        "userId": 3,
+        "email": "lily@columbia.edu",
+        "password": "abc123",
+        "firstname": "Lily",
+        "lastname": "Kim",
+        "phone": "(103)097-1987",
+        "discord": "meowmeow"
+    },
+    {
+        "userId": 4,
+        "email": "bobby@columbia.edu",
+        "password": "abc123",
+        "firstname": "Bobby",
+        "lastname": "Ross",
+        "phone": "(987)145-9174",
+        "discord": "bobrocks"
+    }
+]
