@@ -87,7 +87,7 @@ function FilterPanel(props) {
                 <div id="sort-by-panel">
                     <div>
                         <label>
-                            Most recent
+                            Upcoming
                             <input
                                 type="checkbox"
                                 id="most-recent"
