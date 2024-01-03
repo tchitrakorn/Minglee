@@ -13,63 +13,104 @@ function FilterPanel(props) {
         if (name === "virtual") {
             props.setVirtual(value);
         }
+        if (name === "most-recent") {
+            props.setMostRecent(value);
+        }
+        if (name === "alphabetical") {
+            props.setAlphabetical(value);
+        }
     };
+
     return (
         <div class="filter-wrapper">
             <form>
                 <p class="filter-by">Filter By:</p>
-                <div id="mode-sorting">
-                    <label>
-                        In-person
-                        <input
-                            type="checkbox"
-                            id="in-person"
-                            name="in-person"
-                            value="in-person"
-                            checked={props.inperson}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Virtual
-                        <input
-                            type="checkbox"
-                            id="virtual"
-                            name="virtual"
-                            value="virtual"
-                            checked={props.virtual}
-                            onChange={handleInputChange}
-                        />
-                    </label>
+                <div id="filter-by-panel">
+                    <div>
+                        <label>
+                            In-person
+                            <input
+                                type="checkbox"
+                                id="in-person"
+                                name="in-person"
+                                value="in-person"
+                                checked={props.inperson}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Virtual
+                            <input
+                                type="checkbox"
+                                id="virtual"
+                                name="virtual"
+                                value="virtual"
+                                checked={props.virtual}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <p>Max Group Size</p>
+                            <input
+                                id="group-size"
+                                type="text"
+                                name="groupSize"
+                                defaultValue="100"
+                                onChange={(e) => {
+                                    props.setGroupSize(e.target.value)
+                                }}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Keyword
+                            <input
+                                id="keyword"
+                                type="text"
+                                name="keyword"
+                                size="15"
+                                placeholder="Ex: shopping"
+                                onChange={(e) => {
+                                    props.setKeyword(e.target.value)
+                                }}
+                            />
+                        </label>
+                    </div>
                 </div>
-                <div id="group-size-sorting">
-                    <label>
-                        Max Group Size:
-                        <input
-                            id="group-size"
-                            type="text"
-                            name="groupSize"
-                            defaultValue="100"
-                            onChange={(e) => {
-                                props.setGroupSize(e.target.value)
-                            }}
-                        />
-                    </label>
-                </div>
-                <div id="keyword-sorting">
-                    <label>
-                        Keyword:
-                        <input
-                            id="keyword"
-                            type="text"
-                            name="keyword"
-                            size="15"
-                            onChange={(e) => {
-                                props.setKeyword(e.target.value)
-                            }}
-                        />
-                    </label>
+                <br />
+                <p className="sort-by">Sort By:</p>
+                <div id="sort-by-panel">
+                    <div>
+                        <label>
+                            Most recent
+                            <input
+                                type="checkbox"
+                                id="most-recent"
+                                name="most-recent"
+                                value="most-recent"
+                                checked={props.mostRecent}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Alphabetical
+                            <input
+                                type="checkbox"
+                                id="alphabetical"
+                                name="alphabetical"
+                                value="alphabetical"
+                                checked={props.alphabetical}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                    </div>
                 </div>
             </form>
         </div>

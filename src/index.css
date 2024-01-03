@@ -200,7 +200,7 @@ nav {
   border-radius: 1em;
   height: max-content;
   background: var(--clr-primary-100);
-  padding: 2em;
+  padding: 1em;
   margin: 2em 0 2em 2em;
   position: fixed;
   left: 7vw;
@@ -211,8 +211,8 @@ nav {
   display: block;
 }
 
-#mode-sorting,
-#group-size-sorting {
+#filter-by-panel,
+#sort-by-panel {
   margin-left: 0.5em;
 }
 
@@ -221,7 +221,9 @@ input#group-size {
 }
 
 input#virtual,
-input#in-person {
+input#in-person,
+input#most-recent,
+input#alphabetical {
   margin-left: 0.5em;
 }
 

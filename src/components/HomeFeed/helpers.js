@@ -30,6 +30,20 @@ const filterEvents = (events, inPerson, virtual, groupSize, keyword) => {
     return filteredEvents;
 }
 
+const sortEvents = (events, mostRecent, alpha) => {
+    events.sort(function (a, b) {
+        if (mostRecent && !alpha) {
+            return new Date(a.date) - new Date(b.date);
+        } else if (alpha && !mostRecent) {
+            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+        } else if (mostRecent && alpha) {
+            return new Date(a.date) - new Date(b.date) || a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+        }
+    });
+    return events;
+}
+
 module.exports = {
-    filterEvents
+    filterEvents,
+    sortEvents
 };

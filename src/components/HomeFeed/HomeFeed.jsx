@@ -7,10 +7,13 @@ import helpers from './helpers.js';
 
 function HomeFeed(props) {
     const [events, setEvents] = useState([]);
+    const [sortedEvents, setSortedEvents] = useState([]);
     const [inperson, setInperson] = useState(true);
     const [virtual, setVirtual] = useState(true);
     const [groupSize, setGroupSize] = useState(100);
-    const [keyword, setKeyword] = useState('')
+    const [keyword, setKeyword] = useState('');
+    const [mostRecent, setMostRecent] = useState(true);
+    const [alphabetical, setAlphabetical] = useState(false);
 
     useEffect(() => {
         let params = {
@@ -21,7 +24,9 @@ function HomeFeed(props) {
             .then((response) => {
                 let events = response.data;
                 let filteredEvents = helpers.filterEvents(events, inperson, virtual, groupSize, keyword);
-                setEvents(filteredEvents);
+                let sortedEvents = helpers.sortEvents(filteredEvents, mostRecent, alphabetical);
+                setEvents(sortedEvents);
+                //setSortedEvents(sortedEvents)
             })
             .catch((error) => {
                 console.log(error);
@@ -35,10 +40,14 @@ function HomeFeed(props) {
                 setVirtual={setVirtual}
                 setGroupSize={setGroupSize}
                 setKeyword={setKeyword}
+                setMostRecent={setMostRecent}
+                setAlphabetical={setAlphabetical}
                 groupSize={groupSize}
                 inperson={inperson}
                 virtual={virtual}
                 keyword={keyword}
+                mostRecent={mostRecent}
+                alphabetical={alphabetical}
             />
 
             <div className="filter-placeholder">a</div>

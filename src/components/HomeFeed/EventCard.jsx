@@ -20,15 +20,25 @@ const getFullname = (user) => {
 }
 
 function EventCard(props) {
-    const [joinable, setJoinable] = useState(!props.event.participants.some(participant => participant.userId == props.userId));
+    let [joinable, setJoinable] = useState(props.event.participants.length != props.event.maxSize && !props.event.participants.some(participant => participant.userId == props.userId));
     const [redirect, setRedirect] = useState(false)
-
     const navigate = useNavigate();
-
+    console.log(props.event.name)
+    console.log(props.event.participants.length != props.event.maxSize)
+    console.log(!props.event.participants.some(participant => participant.userId == props.userId))
+    console.log(joinable)
     let joinText = 'Join';
     if (joinable === false) {
-        joinText = 'Unjoin'
+        //if (props.event.participants.length == props.event.maxSize || props.event.participants.some(participant => participant.userId == props.userId)) {
+        if (props.event.participants.length == props.event.maxSize && !props.event.participants.some(participant => participant.userId == props.userId)) {
+            joinText = 'Full'
+        }
+        else {
+            joinText = 'Unjoin'
+        }
     }
+
+
 
     const handleJoin = (e) => {
         let data = {
@@ -131,6 +141,8 @@ function EventCard(props) {
                 {props.event.hostId != props.userId &&
                     <button
                         type="button"
+                        //disabled={(!joinable &&!props.event.participants.some(participant => participant.userId == props.userId) || (joinable && props.event.participants.length == props.event.maxSize))}
+                        disabled={joinText == "Full"}
                         onClick={handleJoin}>
                         {joinText}
                     </button>}
