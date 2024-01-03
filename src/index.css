@@ -68,11 +68,13 @@ body {
   background-color: var(--clr-neutral-100);
   background-image: url("img/background.png");
   background-repeat: repeat;
+  background-attachment: scroll;
 }
 
 a:hover,
 a:focus {
   cursor: pointer;
+  pointer-events: auto;
 }
 
 a {
@@ -401,4 +403,5 @@ u:hover {
 
 .warning-text {
   color: red;
+  font-size: 13px;
 }
