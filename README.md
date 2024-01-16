@@ -1,6 +1,8 @@
 # Minglee
 Ready to mingle but still worried about COVID? Minglee creates an inclusive hangout space, connecting folks both in-person and virtually! With Minglee, you can host, attend, and monitor all your events!
 
+[Minglee Demo](https://youtu.be/k7WLS7MecVM)
+
 ## Getting Started...
 We're excited to share Minglee with you! If you would like to check out Minglee, feel free to download or clone our source code. Go to your terminal (and make sure that you're in the right directory) and enter the following commands:
 
